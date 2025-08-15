@@ -15,9 +15,11 @@ Webapp to handle the printing and configuration of sticker labels.
 
 ## Software design requirements
 
-- Use next.js and type script
-- Use SOLID and DRY principles
+- Use next.js and type script.
+- Use SOLID and DRY principles.
+- Use the latest and best practices for Next.js
+- Use up to date libraries and check if there is no warnings or deprecated packages.
 - Produce a readme.md file with the local use of the app and the architecture.
-- Fully responsive design
+- Fully responsive design.
 - App will be deployed later on to Vercel.
-- License
+- License MIT
