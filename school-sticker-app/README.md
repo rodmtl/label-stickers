@@ -1,26 +1,41 @@
 # SchoolStickerApp
 
-Application web moderne pour créer, personnaliser et imprimer des feuilles d'étiquettes autocollantes adaptées aux besoins scolaires.
+Application web moderne pour créer, personnaliser et imprimer des feuilles d'étiquettes autocollantes adaptées aux besoins scolaires. Interface élégante avec design glassmorphism et fonctionnalités avancées.
 
 ## 🎯 Fonctionnalités
 
-### Création d'étiquettes
-- **Grille configurée** : 14 lignes × 6 colonnes (84 étiquettes par feuille)
-- **Dimensions précises** : 3cm × 1cm par étiquette
-- **Format de feuille** : 19.2cm × 15.7cm
-- **Personnalisation complète** : Texte et icônes personnalisables
+### Création d'étiquettes intelligente
+- **Grille optimisée** : 14 lignes × 6 colonnes (84 étiquettes par feuille)
+- **Dimensions précises** : 3cm × 1cm par étiquette, feuille 19.2cm × 15.7cm
+- **Layout perfectionné** : Icône à gauche, texte sur 1-2 lignes à droite
+- **Ajustement automatique** : Police 6-24px adaptée au contenu
 
-### Interface utilisateur
-- **Sélection d'icônes** : Plus de 150 émojis organisés par catégories
-- **Ajustement automatique** : Taille de police adaptative selon le contenu
-- **Prévisualisation en temps réel** : Voir le résultat avant impression
-- **Design responsive** : Compatible desktop, tablette et mobile
+### Interface utilisateur moderne
+- **Design glassmorphism** : Interface élégante avec effets de transparence et gradients
+- **Sélection d'icônes avancée** : Plus de 150 émojis dans popup organisé par catégories
+  - 😀 Visages (30+ emojis)
+  - 🐶 Animaux (30+ emojis) 
+  - 🌸 Nature (30+ emojis)
+  - 🍎 Nourriture (30+ emojis)
+  - ⚽ Objets (30+ emojis)
+  - ❤️ Symboles (30+ emojis)
+- **Prévisualisation optimale** : Zoom fixé à 80% pour meilleure visualisation
+- **Animations fluides** : Transitions et effets hover professionnels
 
-### Fonctionnalités avancées
-- **Remplissage en masse** : Import de listes de noms
-- **Export PDF** : Formats A4, A3, Letter, Legal
-- **Impression directe** : Optimisée pour l'impression
-- **Échelle ajustable** : Zoom de prévisualisation de 30% à 120%
+### Fonctionnalités de remplissage avancées
+- **Édition individuelle** : Clic sur sticker pour personnalisation complète
+- **Emoji global** : Sélection d'emoji par défaut pour tous les remplissages
+- **Remplir tous** : Application du même nom à tous les stickers en un clic
+- **Remplissage en masse** : 
+  - Saisie manuelle (un nom par ligne)
+  - Import de fichiers .txt/.csv
+  - Application automatique de l'emoji sélectionné
+
+### Export et impression professionnels
+- **Export PDF avancé** : A4, A3, Letter, Legal + **Taille originale (19.2×15.7cm)**
+- **Orientation configurable** : Portrait/Paysage (sauf taille originale en paysage fixe)
+- **Impression directe** : Optimisée sans bordures ni guides
+- **Prévisualisation WYSIWYG** : Ce que vous voyez = ce qui sera imprimé
 
 ## 🚀 Installation et démarrage
 
@@ -54,11 +69,12 @@ npm run lint     # Vérification du code
 ## 🏗️ Architecture technique
 
 ### Stack technologique
-- **Framework** : Next.js 14 (App Router)
-- **Langage** : TypeScript
-- **Styles** : Tailwind CSS
-- **Export PDF** : jsPDF + html2canvas
-- **Icônes** : React Icons + Émojis natifs
+- **Framework** : Next.js 15 (App Router) avec Turbopack
+- **Langage** : TypeScript en mode strict
+- **Styles** : Tailwind CSS v3 avec composants personnalisés
+- **Export PDF** : jsPDF + html2canvas pour haute qualité
+- **Icônes** : 150+ émojis natifs organisés par catégories
+- **Animations** : CSS pures avec classes Tailwind optimisées
 
 ### Structure du projet
 ```
