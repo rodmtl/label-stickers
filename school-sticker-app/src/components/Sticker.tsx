@@ -28,10 +28,10 @@ const Sticker: React.FC<StickerProps> = ({
       if (!textRef.current || !data.name) return;
 
       const textElement = textRef.current;
-      // Zone disponible pour le texte : largeur totale - espace icône - marges
-      const iconSpace = Math.min(height * 0.5, width * 0.2); // Icône encore plus petite
-      const maxWidth = width - iconSpace - 8; // Marge de sécurité pour PDF
-      const maxHeight = height * 0.7; // 70% de la hauteur disponible (plus conservateur)
+      // Zone disponible pour le texte : largeur totale - espace icône - marges DRASTIQUES
+      const iconSpace = Math.min(height * 0.4, width * 0.15); // Icône très petite
+      const maxWidth = width - iconSpace - 12; // Marge drastique pour PDF
+      const maxHeight = height * 0.5; // 50% de la hauteur disponible (ultra-conservateur)
 
       let fontSize = data.fontSize;
       textElement.style.fontSize = `${fontSize}px`;
@@ -46,12 +46,12 @@ const Sticker: React.FC<StickerProps> = ({
         textElement.style.fontSize = `${fontSize}px`;
       }
       
-      // Réduction supplémentaire pour garantir qu'on reste dans les limites
-      // Pour le PDF, on applique une marge de sécurité plus importante
-      fontSize = Math.min(fontSize, Math.floor(height * 0.22)); // Max 22% de la hauteur
+      // Réduction DRASTIQUE pour garantir qu'on reste dans les limites
+      // Pour le PDF, on applique une marge de sécurité EXTREME
+      fontSize = Math.min(fontSize, Math.floor(height * 0.18)); // Max 18% de la hauteur
       
-      // Marge de sécurité supplémentaire pour l'export PDF
-      fontSize = Math.max(6, fontSize - 1);
+      // Marge de sécurité MASSIVE pour l'export PDF
+      fontSize = Math.max(6, fontSize - 2); // Réduction de 2px supplémentaires
 
       setAdjustedFontSize(fontSize);
     };
@@ -79,12 +79,12 @@ const Sticker: React.FC<StickerProps> = ({
       <div
         className="flex items-center justify-center flex-shrink-0"
         style={{ 
-          fontSize: Math.min(height * 0.35, width * 0.12), // Icône encore plus petite
-          width: Math.min(height * 0.4, width * 0.18), // Largeur cohérente avec calcul texte
-          height: height * 0.6, // Hauteur réduite
+          fontSize: Math.min(height * 0.25, width * 0.1), // Icône TRÈS petite
+          width: Math.min(height * 0.3, width * 0.12), // Largeur minimale
+          height: height * 0.5, // Hauteur très réduite
           lineHeight: '1',
-          maxWidth: `${Math.min(height * 0.4, width * 0.18)}px`,
-          maxHeight: `${height * 0.6}px`
+          maxWidth: `${Math.min(height * 0.3, width * 0.12)}px`,
+          maxHeight: `${height * 0.5}px`
         }}
       >
         {data.icon}
@@ -97,11 +97,12 @@ const Sticker: React.FC<StickerProps> = ({
           className="flex-1 font-semibold text-gray-800 overflow-hidden ml-1"
           style={{
             fontSize: `${adjustedFontSize}px`,
-            lineHeight: '1.0', // Ligne plus serrée
-            height: height * 0.7, // Hauteur réduite
+            lineHeight: '0.9', // Ligne TRÈS serrée
+            height: height * 0.5, // Hauteur très réduite
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-start'
+            justifyContent: 'flex-start',
+            paddingRight: '4px' // Marge droite supplémentaire
           }}
         >
           <span style={{
@@ -110,11 +111,12 @@ const Sticker: React.FC<StickerProps> = ({
             WebkitBoxOrient: 'vertical' as const,
             overflow: 'hidden',
             textAlign: 'left',
-            width: '100%',
+            width: 'calc(100% - 4px)', // Largeur réduite
             wordBreak: 'break-word',
             fontSize: `${adjustedFontSize}px`, // Force la taille sur le span aussi
-            lineHeight: '1.0',
-            maxHeight: `${height * 0.6}px` // Hauteur maximale fixe
+            lineHeight: '0.9', // Ligne TRÈS serrée
+            maxHeight: `${height * 0.4}px`, // Hauteur maximale très réduite
+            paddingRight: '2px' // Padding supplémentaire
           }}>
             {data.name}
           </span>
