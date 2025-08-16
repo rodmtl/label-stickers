@@ -52,7 +52,7 @@ export const useStickerApp = () => {
     return appState.stickers.find(s => s.id === appState.selectedStickerId) || null;
   }, [appState.selectedStickerId, appState.stickers]);
 
-  const fillEmptyStickers = useCallback((names: string[]) => {
+  const fillEmptyStickers = useCallback((names: string[], selectedEmoji: string = '😀') => {
     const totalStickers = appState.config.rows * appState.config.columns;
     const newStickers: StickerData[] = [];
     
@@ -65,7 +65,7 @@ export const useStickerApp = () => {
         newStickers.push({
           id: `sticker-${i}`,
           name: names[i].trim(),
-          icon: '😀',
+          icon: selectedEmoji,
           fontSize: appState.defaultFontSize
         });
       }
@@ -73,6 +73,22 @@ export const useStickerApp = () => {
     
     setAppState(prev => ({ ...prev, stickers: newStickers }));
   }, [appState.config, appState.stickers, appState.defaultFontSize]);
+
+  const fillAllWithName = useCallback((name: string, selectedEmoji: string) => {
+    const totalStickers = appState.config.rows * appState.config.columns;
+    const newStickers: StickerData[] = [];
+    
+    for (let i = 0; i < totalStickers; i++) {
+      newStickers.push({
+        id: `sticker-${i}`,
+        name: name,
+        icon: selectedEmoji,
+        fontSize: appState.defaultFontSize
+      });
+    }
+    
+    setAppState(prev => ({ ...prev, stickers: newStickers }));
+  }, [appState.config.rows, appState.config.columns, appState.defaultFontSize]);
 
   return {
     appState,
@@ -82,6 +98,7 @@ export const useStickerApp = () => {
     updateDefaultFontSize,
     clearAllStickers,
     getSelectedSticker,
-    fillEmptyStickers
+    fillEmptyStickers,
+    fillAllWithName
   };
 };

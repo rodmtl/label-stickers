@@ -19,7 +19,8 @@ export default function Home() {
     updateDefaultFontSize,
     clearAllStickers,
     getSelectedSticker,
-    fillEmptyStickers
+    fillEmptyStickers,
+    fillAllWithName
   } = useStickerApp();
 
   const handleStickerClick = (stickerId: string) => {
@@ -78,6 +79,7 @@ export default function Home() {
             <ControlPanel
               onClearAll={clearAllStickers}
               onFillNames={fillEmptyStickers}
+              onFillAllWithName={fillAllWithName}
               defaultFontSize={appState.defaultFontSize}
               onFontSizeChange={updateDefaultFontSize}
               stickerSheetRef={stickerSheetRef}

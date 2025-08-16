@@ -25,23 +25,38 @@ export const useExport = () => {
       const pageSize = PAGE_SIZES[config.pageSize];
       const isLandscape = config.orientation === 'landscape';
       
-      const pageWidth = isLandscape ? pageSize.height : pageSize.width;
-      const pageHeight = isLandscape ? pageSize.width : pageSize.height;
+      let pageWidth, pageHeight, imgWidth, imgHeight, x, y;
+
+      if (config.pageSize === 'Original') {
+        // Pour la taille originale, utiliser les dimensions exactes sans marges
+        pageWidth = pageSize.width;
+        pageHeight = pageSize.height;
+        
+        // Utiliser toute la surface disponible
+        imgWidth = pageWidth;
+        imgHeight = pageHeight;
+        x = 0;
+        y = 0;
+      } else {
+        // Pour les autres formats, utiliser les marges habituelles
+        pageWidth = isLandscape ? pageSize.height : pageSize.width;
+        pageHeight = isLandscape ? pageSize.width : pageSize.height;
+        
+        // Calculer les dimensions de l'image avec marges
+        imgWidth = pageWidth - 20; // Marges de 10mm de chaque côté
+        imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        // Centrer l'image sur la page
+        x = 10; // Marge gauche
+        y = Math.max(10, (pageHeight - imgHeight) / 2); // Centrer verticalement
+      }
 
       // Créer le PDF
       const pdf = new jsPDF({
-        orientation: config.orientation,
+        orientation: config.pageSize === 'Original' ? 'landscape' : config.orientation,
         unit: 'mm',
         format: [pageWidth, pageHeight]
       });
-
-      // Calculer les dimensions de l'image
-      const imgWidth = pageWidth - 20; // Marges de 10mm de chaque côté
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      // Centrer l'image sur la page
-      const x = 10; // Marge gauche
-      const y = Math.max(10, (pageHeight - imgHeight) / 2); // Centrer verticalement
 
       // Ajouter l'image au PDF
       const imgData = canvas.toDataURL('image/png');

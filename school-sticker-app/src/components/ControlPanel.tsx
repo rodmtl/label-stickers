@@ -3,10 +3,12 @@
 import React, { useState, useRef } from 'react';
 import { ExportConfig } from '@/types';
 import { useExport } from '@/hooks/useExport';
+import IconSelector from './IconSelector';
 
 interface ControlPanelProps {
   onClearAll: () => void;
-  onFillNames: (names: string[]) => void;
+  onFillNames: (names: string[], selectedEmoji?: string) => void;
+  onFillAllWithName: (name: string, selectedEmoji: string) => void;
   defaultFontSize: number;
   onFontSizeChange: (size: number) => void;
   stickerSheetRef: React.RefObject<HTMLDivElement | null>;
@@ -15,14 +17,18 @@ interface ControlPanelProps {
 const ControlPanel: React.FC<ControlPanelProps> = ({
   onClearAll,
   onFillNames,
+  onFillAllWithName,
   defaultFontSize,
   onFontSizeChange,
   stickerSheetRef
 }) => {
   const [bulkNames, setBulkNames] = useState('');
+  const [singleName, setSingleName] = useState('');
+  const [selectedEmoji, setSelectedEmoji] = useState('😀');
+  const [showEmojiSelector, setShowEmojiSelector] = useState(false);
   const [exportConfig, setExportConfig] = useState<ExportConfig>({
-    pageSize: 'A4',
-    orientation: 'portrait'
+    pageSize: 'Original',
+    orientation: 'landscape'
   });
   const [isExporting, setIsExporting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -35,8 +41,15 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
       .map(name => name.trim())
       .filter(name => name.length > 0);
     
-    onFillNames(names);
+    onFillNames(names, selectedEmoji);
     setBulkNames('');
+  };
+
+  const handleFillAllWithName = () => {
+    if (singleName.trim()) {
+      onFillAllWithName(singleName.trim(), selectedEmoji);
+      setSingleName('');
+    }
   };
 
   const handleFileImport = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +64,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         .map(name => name.trim())
         .filter(name => name.length > 0);
       
-      onFillNames(names);
+      onFillNames(names, selectedEmoji);
     };
     reader.readAsText(file);
   };
@@ -109,6 +122,44 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         />
       </div>
 
+      {/* Sélection d'emoji global */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Emoji par défaut
+        </label>
+        <button
+          onClick={() => setShowEmojiSelector(true)}
+          className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+        >
+          <span className="text-2xl">{selectedEmoji}</span>
+          <span className="text-sm text-gray-600">Changer l&apos;emoji</span>
+        </button>
+      </div>
+
+      {/* Remplir tous avec le même nom */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Remplir tous les stickers avec le même nom
+        </label>
+        <div className="flex space-x-2">
+          <input
+            type="text"
+            value={singleName}
+            onChange={(e) => setSingleName(e.target.value)}
+            placeholder="Nom à appliquer partout..."
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            maxLength={20}
+          />
+          <button
+            onClick={handleFillAllWithName}
+            disabled={!singleName.trim()}
+            className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 disabled:bg-gray-300"
+          >
+            Remplir tout
+          </button>
+        </div>
+      </div>
+
       {/* Remplissage en masse */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -162,6 +213,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
               }))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
+              <option value="Original">Taille originale (19.2×15.7cm)</option>
               <option value="A4">A4</option>
               <option value="A3">A3</option>
               <option value="Letter">Letter</option>
@@ -179,11 +231,19 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
                 ...prev,
                 orientation: e.target.value as ExportConfig['orientation']
               }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              disabled={exportConfig.pageSize === 'Original'}
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                exportConfig.pageSize === 'Original' ? 'bg-gray-100 text-gray-500 cursor-not-allowed' : ''
+              }`}
             >
               <option value="portrait">Portrait</option>
               <option value="landscape">Paysage</option>
             </select>
+            {exportConfig.pageSize === 'Original' && (
+              <p className="text-xs text-gray-500 mt-1">
+                L&apos;orientation est fixée en paysage pour la taille originale
+              </p>
+            )}
           </div>
         </div>
 
@@ -216,6 +276,14 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           Effacer tous les stickers
         </button>
       </div>
+
+      {/* Sélecteur d'icônes */}
+      <IconSelector
+        isOpen={showEmojiSelector}
+        onClose={() => setShowEmojiSelector(false)}
+        onIconSelect={setSelectedEmoji}
+        selectedIcon={selectedEmoji}
+      />
     </div>
   );
 };

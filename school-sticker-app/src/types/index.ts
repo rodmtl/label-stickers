@@ -15,7 +15,7 @@ export interface StickerSheetConfig {
 }
 
 export interface ExportConfig {
-  pageSize: 'A4' | 'A3' | 'Letter' | 'Legal';
+  pageSize: 'A4' | 'A3' | 'Letter' | 'Legal' | 'Original';
   orientation: 'portrait' | 'landscape';
 }
 

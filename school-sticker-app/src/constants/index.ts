@@ -22,5 +22,6 @@ export const PAGE_SIZES = {
   A4: { width: 210, height: 297 },
   A3: { width: 297, height: 420 },
   Letter: { width: 216, height: 279 },
-  Legal: { width: 216, height: 356 }
+  Legal: { width: 216, height: 356 },
+  Original: { width: 192, height: 157 } // Taille originale de la feuille de stickers en mm
 };
