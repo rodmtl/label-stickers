@@ -10,7 +10,7 @@ import { StickerData } from '@/types';
 export default function Home() {
   const stickerSheetRef = useRef<HTMLDivElement>(null);
   const [showEditor, setShowEditor] = useState(false);
-  const [previewScale, setPreviewScale] = useState(0.8);
+  const previewScale = 0.8;
 
   const {
     appState,
@@ -119,41 +119,32 @@ export default function Home() {
                     </h2>
                     <p className="text-sm text-gray-600 mt-1">Aperçu de votre feuille d&apos;étiquettes</p>
                   </div>
-                  <div className="flex items-center space-x-4 bg-white/70 rounded-xl px-4 py-2 border border-indigo-100">
-                    <label className="text-sm font-semibold text-gray-700">
-                      Zoom: {Math.round(previewScale * 100)}%
-                    </label>
-                    <input
-                      type="range"
-                      min="0.3"
-                      max="1.2"
-                      step="0.1"
-                      value={previewScale}
-                      onChange={(e) => setPreviewScale(Number(e.target.value))}
-                      className="w-24 h-2 bg-indigo-200 rounded-lg appearance-none cursor-pointer slider"
-                    />
+                  <div className="bg-white/70 rounded-xl px-4 py-2 border border-indigo-100">
+                    <span className="text-sm font-semibold text-gray-700">
+                      Zoom optimal: {Math.round(previewScale * 100)}%
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="p-6">
                 {/* Statistiques */}
-                <div className="mb-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-4 border border-blue-100">
-                    <div className="text-2xl font-bold text-blue-600">{appState.config.rows}×{appState.config.columns}</div>
-                    <div className="text-xs text-blue-600 font-medium">Grille</div>
+                <div className="mb-6 grid grid-cols-2 lg:grid-cols-4 gap-3">
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-3 border border-blue-100 min-w-0">
+                    <div className="text-lg sm:text-xl font-bold text-blue-600 leading-tight truncate">{appState.config.rows}×{appState.config.columns}</div>
+                    <div className="text-xs text-blue-600 font-medium mt-1">Grille</div>
                   </div>
-                  <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-4 border border-emerald-100">
-                    <div className="text-2xl font-bold text-emerald-600">{appState.config.stickerWidth}×{appState.config.stickerHeight}cm</div>
-                    <div className="text-xs text-emerald-600 font-medium">Sticker</div>
+                  <div className="bg-gradient-to-br from-emerald-50 to-green-50 rounded-xl p-3 border border-emerald-100 min-w-0">
+                    <div className="text-sm sm:text-lg font-bold text-emerald-600 leading-tight truncate">{appState.config.stickerWidth}×{appState.config.stickerHeight}cm</div>
+                    <div className="text-xs text-emerald-600 font-medium mt-1">Sticker</div>
                   </div>
-                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 border border-purple-100">
-                    <div className="text-2xl font-bold text-purple-600">{appState.config.sheetWidth}×{appState.config.sheetHeight}cm</div>
-                    <div className="text-xs text-purple-600 font-medium">Feuille</div>
+                  <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-3 border border-purple-100 min-w-0">
+                    <div className="text-sm sm:text-lg font-bold text-purple-600 leading-tight truncate">{appState.config.sheetWidth}×{appState.config.sheetHeight}cm</div>
+                    <div className="text-xs text-purple-600 font-medium mt-1">Feuille</div>
                   </div>
-                  <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-4 border border-orange-100">
-                    <div className="text-2xl font-bold text-orange-600">{appState.config.rows * appState.config.columns}</div>
-                    <div className="text-xs text-orange-600 font-medium">Total</div>
+                  <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-3 border border-orange-100 min-w-0">
+                    <div className="text-lg sm:text-xl font-bold text-orange-600 leading-tight truncate">{appState.config.rows * appState.config.columns}</div>
+                    <div className="text-xs text-orange-600 font-medium mt-1">Total</div>
                   </div>
                 </div>
 
