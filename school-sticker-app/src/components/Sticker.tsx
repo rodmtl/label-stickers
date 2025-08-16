@@ -28,16 +28,19 @@ const Sticker: React.FC<StickerProps> = ({
       if (!textRef.current || !data.name) return;
 
       const textElement = textRef.current;
-      const maxWidth = width * 0.85; // 85% de la largeur pour la marge
-      const maxHeight = height * 0.4; // 40% de la hauteur pour le texte
+      // Zone disponible pour le texte : largeur totale - espace icône - marges
+      const iconSpace = Math.min(height * 0.8, width * 0.3);
+      const maxWidth = width - iconSpace - 8; // 8px pour les marges et espacement
+      const maxHeight = height * 0.9; // 90% de la hauteur disponible
 
       let fontSize = data.fontSize;
       textElement.style.fontSize = `${fontSize}px`;
+      textElement.style.lineHeight = '1.1';
 
-      // Réduire la taille jusqu'à ce que le texte rentre
+      // Réduire la taille jusqu'à ce que le texte rentre sur 2 lignes max
       while (
         (textElement.scrollWidth > maxWidth || textElement.scrollHeight > maxHeight) &&
-        fontSize > 8
+        fontSize > 6
       ) {
         fontSize -= 1;
         textElement.style.fontSize = `${fontSize}px`;
@@ -52,7 +55,7 @@ const Sticker: React.FC<StickerProps> = ({
   return (
     <div
       className={`
-        relative border border-gray-300 bg-white flex flex-col items-center justify-center
+        relative border border-gray-300 bg-white flex items-center px-1
         cursor-pointer transition-all duration-200 hover:bg-gray-50
         ${isSelected ? 'ring-2 ring-blue-500 bg-blue-50' : ''}
         ${className}
@@ -60,23 +63,30 @@ const Sticker: React.FC<StickerProps> = ({
       style={{ width: `${width}px`, height: `${height}px` }}
       onClick={onClick}
     >
-      {/* Icône */}
+      {/* Icône à gauche */}
       <div
-        className="flex items-center justify-center"
-        style={{ fontSize: Math.min(height * 0.5, width * 0.3) }}
+        className="flex items-center justify-center flex-shrink-0"
+        style={{ 
+          fontSize: Math.min(height * 0.7, width * 0.25),
+          width: Math.min(height * 0.8, width * 0.3),
+          height: '100%'
+        }}
       >
         {data.icon}
       </div>
 
-      {/* Nom */}
+      {/* Texte à droite sur 1-2 lignes */}
       {data.name && (
         <div
           ref={textRef}
-          className="text-center font-semibold text-gray-800 leading-tight overflow-hidden"
+          className="flex-1 font-semibold text-gray-800 leading-tight overflow-hidden ml-1"
           style={{
             fontSize: `${adjustedFontSize}px`,
-            maxWidth: '85%',
-            maxHeight: '40%'
+            lineHeight: '1.1',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical' as const,
+            wordBreak: 'break-word'
           }}
         >
           {data.name}
@@ -85,7 +95,7 @@ const Sticker: React.FC<StickerProps> = ({
 
       {/* Indicateur de sélection */}
       {isSelected && (
-        <div className="absolute top-0 right-0 w-3 h-3 bg-blue-500 rounded-bl-lg"></div>
+        <div className="absolute top-0 right-0 w-2 h-2 bg-blue-500 rounded-bl-md"></div>
       )}
     </div>
   );

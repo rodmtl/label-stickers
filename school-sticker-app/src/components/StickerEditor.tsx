@@ -148,15 +148,38 @@ const StickerEditor: React.FC<StickerEditorProps> = ({
               </label>
               <div className="flex justify-center">
                 <div
-                  className="border-2 border-gray-300 bg-white flex flex-col items-center justify-center rounded-lg shadow-sm"
+                  className="border-2 border-gray-300 bg-white flex items-center px-2 rounded-lg shadow-sm"
                   style={{
                     width: '150px',
-                    height: '50px',
-                    fontSize: `${Math.min(fontSize, 18)}px`
+                    height: '50px'
                   }}
                 >
-                  <div className="text-2xl">{icon}</div>
-                  {name && <div className="text-center font-semibold leading-tight px-2">{name}</div>}
+                  {/* Icône à gauche */}
+                  <div 
+                    className="flex items-center justify-center flex-shrink-0"
+                    style={{ 
+                      fontSize: '18px',
+                      width: '25px'
+                    }}
+                  >
+                    {icon}
+                  </div>
+                  {/* Texte à droite */}
+                  {name && (
+                    <div 
+                      className="flex-1 font-semibold text-gray-800 leading-tight ml-2 overflow-hidden"
+                      style={{
+                        fontSize: `${Math.min(fontSize, 14)}px`,
+                        lineHeight: '1.1',
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical' as const,
+                        wordBreak: 'break-word'
+                      }}
+                    >
+                      {name}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

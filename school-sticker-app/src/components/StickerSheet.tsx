@@ -29,9 +29,14 @@ const StickerSheet = forwardRef<HTMLDivElement, StickerSheetProps>(({
   const stickerWidth = cmToPx(config.stickerWidth);
   const stickerHeight = cmToPx(config.stickerHeight);
 
-  // Calculer l'espacement entre les stickers
-  const horizontalSpacing = (sheetWidth - (config.columns * stickerWidth)) / (config.columns + 1);
-  const verticalSpacing = (sheetHeight - (config.rows * stickerHeight)) / (config.rows + 1);
+  // Calculer l'espacement pour une grille parfaitement alignée
+  // Largeur/hauteur effective par sticker incluant l'espacement
+  const cellWidth = sheetWidth / config.columns;
+  const cellHeight = sheetHeight / config.rows;
+  
+  // Centrer chaque sticker dans sa cellule
+  const stickerOffsetX = (cellWidth - stickerWidth) / 2;
+  const stickerOffsetY = (cellHeight - stickerHeight) / 2;
 
   const renderStickers = () => {
     const stickerElements = [];
@@ -46,8 +51,9 @@ const StickerSheet = forwardRef<HTMLDivElement, StickerSheetProps>(({
           fontSize: 12
         };
 
-        const x = horizontalSpacing + col * (stickerWidth + horizontalSpacing);
-        const y = verticalSpacing + row * (stickerHeight + verticalSpacing);
+        // Calculer la position de chaque sticker dans sa cellule
+        const x = col * cellWidth + stickerOffsetX;
+        const y = row * cellHeight + stickerOffsetY;
 
         stickerElements.push(
           <div
@@ -95,9 +101,9 @@ const StickerSheet = forwardRef<HTMLDivElement, StickerSheetProps>(({
                 key={`v-line-${i}`}
                 className="absolute bg-gray-200 opacity-30"
                 style={{
-                  left: `${horizontalSpacing + i * (stickerWidth + horizontalSpacing) - 1}px`,
+                  left: `${i * cellWidth}px`,
                   top: 0,
-                  width: '2px',
+                  width: '1px',
                   height: '100%'
                 }}
               />
@@ -109,9 +115,9 @@ const StickerSheet = forwardRef<HTMLDivElement, StickerSheetProps>(({
                 key={`h-line-${i}`}
                 className="absolute bg-gray-200 opacity-30"
                 style={{
-                  top: `${verticalSpacing + i * (stickerHeight + verticalSpacing) - 1}px`,
+                  top: `${i * cellHeight}px`,
                   left: 0,
-                  height: '2px',
+                  height: '1px',
                   width: '100%'
                 }}
               />
