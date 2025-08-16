@@ -43,105 +43,160 @@ const StickerEditor: React.FC<StickerEditorProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-800">Modifier le sticker</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 text-2xl"
-          >
-            ×
-          </button>
-        </div>
-
-        <div className="space-y-4">
-          {/* Nom */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Nom
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Entrez le nom..."
-              maxLength={20}
-            />
-          </div>
-
-          {/* Icône */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Icône
-            </label>
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setShowIconSelector(true)}
-                className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 flex items-center space-x-2"
-              >
-                <span className="text-2xl">{icon || '😀'}</span>
-                <span className="text-sm text-gray-600">Changer</span>
-              </button>
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden animate-in fade-in duration-200">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-4 border-b border-gray-100">
+          <div className="flex justify-between items-center">
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">Personnaliser le sticker</h2>
+              <p className="text-sm text-gray-600 mt-1">Créez votre étiquette parfaite</p>
             </div>
-          </div>
-
-          {/* Taille de police */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Taille de police: {fontSize}px
-            </label>
-            <input
-              type="range"
-              min="8"
-              max="24"
-              value={fontSize}
-              onChange={(e) => setFontSize(Number(e.target.value))}
-              className="w-full"
-            />
-          </div>
-
-          {/* Aperçu */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Aperçu
-            </label>
-            <div
-              className="border border-gray-300 bg-white flex flex-col items-center justify-center"
-              style={{
-                width: '120px',
-                height: '40px',
-                fontSize: `${Math.min(fontSize, 16)}px`
-              }}
-            >
-              <div className="text-lg">{icon}</div>
-              {name && <div className="text-center font-semibold leading-tight">{name}</div>}
-            </div>
-          </div>
-        </div>
-
-        {/* Boutons d'action */}
-        <div className="flex justify-between mt-6">
-          <button
-            onClick={handleClear}
-            className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-          >
-            Effacer
-          </button>
-          <div className="space-x-2">
             <button
               onClick={onClose}
-              className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors group"
             >
-              Annuler
+              <svg className="w-5 h-5 text-gray-400 group-hover:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
+          </div>
+        </div>
+
+        <div className="p-6">
+
+          <div className="space-y-6">
+            {/* Nom */}
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-5 border border-blue-100">
+              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                <span className="flex items-center space-x-2">
+                  <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a1.994 1.994 0 01-1.414.586H7a4 4 0 01-4-4V7a4 4 0 014-4z" />
+                  </svg>
+                  <span>Nom du sticker</span>
+                </span>
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-3 border border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400"
+                placeholder="Entrez le nom..."
+                maxLength={20}
+              />
+              <p className="text-xs text-blue-600 mt-2">{name.length}/20 caractères</p>
+            </div>
+
+            {/* Icône */}
+            <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl p-5 border border-orange-100">
+              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                <span className="flex items-center space-x-2">
+                  <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293H15M9 10V9a2 2 0 012-2h2a2 2 0 012 2v1M9 10v4a2 2 0 002 2h2a2 2 0 002-2v-4" />
+                  </svg>
+                  <span>Emoji</span>
+                </span>
+              </label>
+              <button
+                onClick={() => setShowIconSelector(true)}
+                className="group w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-xl hover:border-orange-300 hover:shadow-md transition-all duration-200 flex items-center space-x-3"
+              >
+                <span className="text-3xl group-hover:scale-110 transition-transform duration-200">{icon || '😀'}</span>
+                <div className="flex-1 text-left">
+                  <span className="text-sm font-medium text-gray-700">Changer l&apos;emoji</span>
+                  <p className="text-xs text-gray-500">Cliquez pour ouvrir la sélection</p>
+                </div>
+                <svg className="w-5 h-5 text-gray-400 group-hover:text-orange-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Taille de police */}
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-100">
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-sm font-semibold text-gray-700 flex items-center space-x-2">
+                  <svg className="w-4 h-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 6h.01M6 20h.01M12 6h.01M12 20h.01M18 6h.01M18 20h.01" />
+                  </svg>
+                  <span>Taille de police</span>
+                </label>
+                <span className="text-lg font-bold text-purple-600">{fontSize}px</span>
+              </div>
+              <input
+                type="range"
+                min="8"
+                max="24"
+                value={fontSize}
+                onChange={(e) => setFontSize(Number(e.target.value))}
+                className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer slider"
+              />
+              <div className="flex justify-between text-xs text-purple-600 mt-1">
+                <span>8px</span>
+                <span>24px</span>
+              </div>
+            </div>
+
+            {/* Aperçu */}
+            <div className="bg-gradient-to-br from-gray-50 to-slate-100 rounded-xl p-5 border border-gray-200">
+              <label className="block text-sm font-semibold text-gray-700 mb-3 flex items-center space-x-2">
+                <svg className="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                <span>Aperçu du sticker</span>
+              </label>
+              <div className="flex justify-center">
+                <div
+                  className="border-2 border-gray-300 bg-white flex flex-col items-center justify-center rounded-lg shadow-sm"
+                  style={{
+                    width: '150px',
+                    height: '50px',
+                    fontSize: `${Math.min(fontSize, 18)}px`
+                  }}
+                >
+                  <div className="text-2xl">{icon}</div>
+                  {name && <div className="text-center font-semibold leading-tight px-2">{name}</div>}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Footer avec boutons d'action */}
+        <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
+          <div className="flex justify-between items-center">
             <button
-              onClick={handleSave}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              onClick={handleClear}
+              className="group px-4 py-2.5 bg-gradient-to-r from-red-500 to-rose-600 text-white rounded-xl font-medium hover:from-red-600 hover:to-rose-700 transition-all duration-200 transform hover:scale-105"
             >
-              Sauvegarder
+              <span className="flex items-center space-x-2">
+                <svg className="w-4 h-4 group-hover:rotate-12 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                <span>Effacer</span>
+              </span>
             </button>
+            <div className="flex space-x-3">
+              <button
+                onClick={onClose}
+                className="px-6 py-2.5 bg-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-300 transition-colors"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={handleSave}
+                className="group px-6 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-indigo-700 transition-all duration-200 transform hover:scale-105"
+              >
+                <span className="flex items-center space-x-2">
+                  <svg className="w-4 h-4 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Sauvegarder</span>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
