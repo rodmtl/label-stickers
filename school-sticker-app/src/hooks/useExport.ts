@@ -12,14 +12,31 @@ export const useExport = () => {
     config: ExportConfig,
     filename: string = 'stickers'
   ) => {
-    if (!element) return false;
+    if (!element) {
+      console.error('Élément non trouvé pour l\'export PDF');
+      return false;
+    }
+    
+    // console.log('Export PDF - Élément:', element);
+    // console.log('Export PDF - Dimensions:', element.offsetWidth, 'x', element.offsetHeight);
+    
     try {
-      // Créer un canvas à partir de l'élément
+      // Créer un canvas à partir de l'élément avec options simplifiées
       const canvas = await html2canvas(element, {
         scale: 2, // Qualité haute résolution
         useCORS: true,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#ffffff',
+        logging: false, // Désactiver les logs pour production
+        allowTaint: false
       });
+
+      // console.log('Canvas créé:', canvas.width, 'x', canvas.height);
+      
+      // Vérifier que le canvas n'est pas vide
+      if (canvas.width === 0 || canvas.height === 0) {
+        console.error('Canvas vide - dimensions invalides');
+        return false;
+      }
 
       // Obtenir les dimensions de la page
       const pageSize = PAGE_SIZES[config.pageSize];
@@ -28,15 +45,16 @@ export const useExport = () => {
       let pageWidth, pageHeight, imgWidth, imgHeight, x, y;
 
       if (config.pageSize === 'Original') {
-        // Pour la taille originale, utiliser les dimensions exactes sans marges
+        // Pour la taille originale, utiliser les dimensions exactes avec petites marges de sécurité
         pageWidth = pageSize.width;
         pageHeight = pageSize.height;
         
-        // Utiliser toute la surface disponible
-        imgWidth = pageWidth;
-        imgHeight = pageHeight;
-        x = 0;
-        y = 0;
+        // Petites marges pour éviter les coupures lors de l'impression
+        const margin = 1; // 1mm de marge
+        imgWidth = pageWidth - (margin * 2);
+        imgHeight = pageHeight - (margin * 2);
+        x = margin;
+        y = margin;
       } else {
         // Pour les autres formats, utiliser les marges habituelles
         pageWidth = isLandscape ? pageSize.height : pageSize.width;
@@ -60,10 +78,13 @@ export const useExport = () => {
 
       // Ajouter l'image au PDF
       const imgData = canvas.toDataURL('image/png');
+      // console.log('Ajout image au PDF:', x, y, imgWidth, imgHeight);
+      
       pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
 
       // Télécharger le fichier
       pdf.save(`${filename}.pdf`);
+      // console.log('PDF généré avec succès');
       
       return true;
     } catch (error) {

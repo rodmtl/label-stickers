@@ -8,7 +8,7 @@ export const useStickerApp = () => {
   const [appState, setAppState] = useState<AppState>({
     stickers: [],
     config: DEFAULT_STICKER_CONFIG,
-    defaultFontSize: 12,
+    defaultFontSize: 10, // Réduction de la police par défaut
     selectedStickerId: null
   });
 

@@ -84,10 +84,12 @@ const StickerSheet = forwardRef<HTMLDivElement, StickerSheetProps>(({
     <div className="flex justify-center items-center p-4">
       <div
         ref={ref}
-        className={`relative bg-white ${showBorders ? 'border-2 border-gray-400' : ''} print:border-none`}
+        className={`relative bg-white overflow-hidden ${showBorders ? 'border-2 border-gray-400' : ''} print:border-none`}
         style={{
           width: `${sheetWidth}px`,
-          height: `${sheetHeight}px`
+          height: `${sheetHeight}px`,
+          minWidth: `${sheetWidth}px`,
+          minHeight: `${sheetHeight}px`
         }}
       >
         {renderStickers()}

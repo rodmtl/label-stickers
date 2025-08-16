@@ -123,15 +123,15 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
           </div>
           <input
             type="range"
-            min="8"
-            max="24"
+            min="6"
+            max="14"
             value={defaultFontSize}
             onChange={(e) => onFontSizeChange(Number(e.target.value))}
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
           />
           <div className="flex justify-between text-xs text-gray-500 mt-1">
-            <span>8px</span>
-            <span>24px</span>
+            <span>6px</span>
+            <span>14px</span>
           </div>
         </div>
 
