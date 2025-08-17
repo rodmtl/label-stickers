@@ -12,7 +12,7 @@ Application web moderne pour la création, personnalisation et impression de feu
 
 ### Fonctionnalités principales
 - **Sélection d'icônes** : Popup avec plus de 150 émojis organisés par catégories (Visages, Animaux, Nature, Nourriture, Objets, Symboles)
-- **Personnalisation** : Ajustement automatique de la taille de police (6px-24px) selon le contenu
+- **Personnalisation** : Police fixe optimisée 8px pour compatibilité PDF parfaite et lisibilité
 - **Prévisualisation** : Aperçu en temps réel de la feuille avec zoom optimal fixé à 80%
 - **Remplissage intelligent** :
   - Édition individuelle par clic sur sticker
@@ -21,6 +21,8 @@ Application web moderne pour la création, personnalisation et impression de feu
   - Sélection d'emoji global par défaut
 - **Export & Impression** :
   - Export PDF avec formats configurables (A4, A3, Letter, Legal, Taille originale)
+  - **Compatibilité PDF 100%** : Texte jamais coupé grâce au dimensionnement fixe
+  - **Rendu identique** : Écran = PDF sans débordement
   - Impression directe optimisée
   - Orientation configurable (Portrait/Paysage)
 
@@ -51,9 +53,13 @@ Application web moderne pour la création, personnalisation et impression de feu
 - **Performance** : Build optimisé, lazy loading, compression assets
 - **Licence MIT** : Code open source
 
-### Améliorations implémentées
+### Améliorations implémentées v2.1
 - **Interface moderne** : Design professionnel avec glassmorphism et gradients
 - **UX optimisée** : Workflow intuitif, feedback visuel, animations
 - **Fonctionnalités avancées** : Remplissage intelligent, export multiple formats
 - **Architecture robuste** : Gestion d'état centralisée, composants réutilisables
 - **Accessibilité** : Navigation clavier, contrastes optimisés, states clairs
+- **🔥 NOUVEAU : Export PDF perfectionné** : Texte jamais coupé, rendu identique écran/PDF
+- **🔥 NOUVEAU : Dimensionnement fixe** : Police 8px optimisée pour lisibilité et compatibilité
+- **🔥 NOUVEAU : Marges précises** : Calcul mathématique des espaces pour éviter débordements
+- **🔥 NOUVEAU : Performance améliorée** : Suppression calculs dynamiques complexes

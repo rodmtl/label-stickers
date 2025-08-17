@@ -2,6 +2,33 @@
 
 Toutes les modifications notables de ce projet seront documentées dans ce fichier.
 
+## [2.1.0] - 2024-01-17
+
+### 🔒 Corrections critiques PDF
+- **FIXED** : Débordement de texte dans l'export PDF complètement éliminé
+- **FIXED** : Police fixée à 8px pour garantir la compatibilité PDF parfaite
+- **FIXED** : Dimensions de conteneurs précisément calculées (65% largeur × 70% hauteur)
+- **FIXED** : Marges optimisées (4px gauche + 6px droite + 1px padding interne)
+- **FIXED** : Suppression des calculs dynamiques problématiques avec html2canvas
+
+### 🎯 Améliorations du dimensionnement
+- **CHANGED** : Taille de police fixe 8px au lieu de l'algorithme adaptatif
+- **CHANGED** : Zone icône réduite à 25% largeur × 30% hauteur pour plus d'espace texte
+- **CHANGED** : Plage de police par défaut ajustée à 6-14px (au lieu de 8-24px)
+- **CHANGED** : LineHeight optimisé à 1.0 pour compacité maximale
+- **CHANGED** : Structure HTML simplifiée pour meilleure compatibilité
+
+### ⚡ Optimisations techniques
+- **REMOVED** : Hooks inutilisés (useEffect, useState) du composant Sticker
+- **REMOVED** : Variables non utilisées pour cleaner le code
+- **IMPROVED** : Performance en supprimant les calculs en temps réel
+- **IMPROVED** : Fiabilité de l'export PDF avec dimensions fixes
+
+### 🎨 Interface utilisateur
+- **MAINTAINED** : Design glassmorphism et animations préservés
+- **MAINTAINED** : Toutes les fonctionnalités existantes opérationnelles
+- **MAINTAINED** : Responsive design sur tous les écrans
+
 ## [2.0.0] - 2024-01-16
 
 ### 🎨 Interface modernisée

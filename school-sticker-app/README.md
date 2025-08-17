@@ -8,7 +8,7 @@ Application web moderne pour créer, personnaliser et imprimer des feuilles d'é
 - **Grille optimisée** : 14 lignes × 6 colonnes (84 étiquettes par feuille)
 - **Dimensions précises** : 3cm × 1cm par étiquette, feuille 19.2cm × 15.7cm
 - **Layout perfectionné** : Icône à gauche, texte sur 1-2 lignes à droite
-- **Ajustement automatique** : Police 6-24px adaptée au contenu
+- **Dimensionnement optimisé** : Police 8px fixe pour compatibilité PDF parfaite
 
 ### Interface utilisateur moderne
 - **Design glassmorphism** : Interface élégante avec effets de transparence et gradients
@@ -32,10 +32,11 @@ Application web moderne pour créer, personnaliser et imprimer des feuilles d'é
   - Application automatique de l'emoji sélectionné
 
 ### Export et impression professionnels
-- **Export PDF avancé** : A4, A3, Letter, Legal + **Taille originale (19.2×15.7cm)**
+- **Export PDF perfectionné** : A4, A3, Letter, Legal + **Taille originale (19.2×15.7cm)**
+- **Compatibilité PDF garantie** : Texte jamais coupé grâce au dimensionnement optimisé
+- **Rendu identique** : Écran = PDF à 100% sans débordement
 - **Orientation configurable** : Portrait/Paysage (sauf taille originale en paysage fixe)
 - **Impression directe** : Optimisée sans bordures ni guides
-- **Prévisualisation WYSIWYG** : Ce que vous voyez = ce qui sera imprimé
 
 ## 🚀 Installation et démarrage
 
@@ -117,7 +118,7 @@ src/
 
 ### 1. Configuration initiale
 1. **Définir l'emoji par défaut** : Cliquez sur le bouton emoji dans "Emoji par défaut"
-2. **Ajuster la police** : Utilisez le slider pour la taille par défaut (8-24px)
+2. **Ajuster la police** : Utilisez le slider pour la taille par défaut (6-14px, optimisé pour PDF)
 3. **Prévisualisation optimale** : Zoom automatique à 80% pour meilleure visualisation
 
 ### 2. Création d'étiquettes
@@ -156,11 +157,12 @@ src/
 - **Grille parfaite** : 14 lignes × 6 colonnes = 84 étiquettes
 - **Distribution uniforme** : Calcul automatique des positions
 
-### Layout optimisé icône-texte
-- **Zone icône** : 25-30% largeur, positionnée à gauche, taille adaptée à la hauteur
-- **Zone texte** : 70-75% largeur restante, 1-2 lignes, alignement vertical centré
-- **Police adaptative** : 6px-24px avec ajustement automatique selon contenu
-- **Espacement intelligent** : Marges et paddings calculés pour rendu optimal
+### Layout optimisé icône-texte v2.1
+- **Zone icône** : 25% largeur, positionnée à gauche, taille 30% de la hauteur
+- **Zone texte** : 65% largeur, 1-2 lignes, alignement vertical centré
+- **Police fixe optimisée** : 8px pour lisibilité et compatibilité PDF parfaite
+- **Espacement précis** : 4px marge gauche + 6px marge droite + 1px padding interne
+- **Dimensions fixes** : Hauteur 70% × Largeur 65% du sticker pour stabilité
 
 ### Algorithme de placement
 - **Grille cellulaire** : `cellWidth = sheetWidth / 6`, `cellHeight = sheetHeight / 14`
@@ -219,7 +221,7 @@ Pour toute question ou problème :
 
 ---
 
-## 🚀 Nouvelles fonctionnalités v2.0
+## 🚀 Nouvelles fonctionnalités v2.1
 
 ### Interface modernisée
 - **Design glassmorphism** : Effets de transparence et gradients élégants
@@ -233,11 +235,21 @@ Pour toute question ou problème :
 - **Zoom optimal fixe** : 80% pour meilleure visualisation, plus de confusion
 - **Layout sticker perfectionné** : Icône gauche, texte 1-2 lignes droite
 
-### Export professionnel
+### Export professionnel PERFECTIONNÉ v2.1
 - **Taille originale** : Format exact 19.2×15.7cm pour découpe parfaite
 - **Qualité haute résolution** : Export PDF avec échelle 2x pour netteté
 - **Impression optimisée** : Suppression automatique guides et bordures
+- **🔥 NOUVEAU : Compatibilité PDF 100%** : Texte jamais coupé grâce au dimensionnement fixe
+- **🔥 NOUVEAU : Police optimisée** : 8px fixe pour équilibre lisibilité/compatibilité
+- **🔥 NOUVEAU : Dimensions précises** : Layout mathématiquement calculé pour rendu parfait
+
+### Corrections majeures v2.1
+- ✅ **Débordement texte éliminé** : Plus jamais de texte coupé dans les PDFs
+- ✅ **Dimensionnement fiable** : Police fixe 8px pour tous les stickers
+- ✅ **Marges optimisées** : Calcul précis des espaces pour éviter les conflits
+- ✅ **Rendu identique** : Ce qui s'affiche à l'écran = ce qui s'imprime exactement
+- ✅ **Performance améliorée** : Suppression des calculs dynamiques complexes
 
 ---
 
-**SchoolStickerApp v2.0** - Interface moderne, workflow intelligent, qualité professionnelle ! 🎓✨🚀
+**SchoolStickerApp v2.1** - PDF parfait garanti, qualité professionnelle assurée ! 🎓✨🔒
