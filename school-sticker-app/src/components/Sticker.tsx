@@ -25,7 +25,7 @@ const Sticker: React.FC<StickerProps> = ({
   return (
     <div
       className={`
-        relative border border-gray-300 bg-white flex items-center px-1
+        relative border border-gray-300 bg-white flex items-start px-1
         cursor-pointer transition-all duration-200 hover:bg-gray-50
         ${isSelected ? 'ring-2 ring-blue-500 bg-blue-50' : ''}
         ${className}
@@ -34,7 +34,8 @@ const Sticker: React.FC<StickerProps> = ({
         width: `${width}px`, 
         height: `${height}px`,
         overflow: 'hidden', // Force le clipping du contenu
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        paddingTop: '6px' // Déplacer tout le contenu vers le haut (3mm total)
       }}
       onClick={onClick}
     >
@@ -45,7 +46,8 @@ const Sticker: React.FC<StickerProps> = ({
           fontSize: `${height * 0.3}px`, // Icône légèrement plus grande
           width: `${width * 0.25}px`, // Largeur fixe
           height: `${height * 0.7}px`, // Hauteur légèrement plus grande
-          lineHeight: '1'
+          lineHeight: '1',
+          transform: 'translateY(-6px)' // Déplacer l'icône vers le haut pour PDF
         }}
       >
         {data.icon}
@@ -66,7 +68,8 @@ const Sticker: React.FC<StickerProps> = ({
             justifyContent: 'flex-start',
             marginLeft: '4px',
             paddingRight: '6px',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            transform: 'translateY(-6px)' // Déplacer le texte vers le haut pour PDF
           }}
         >
           <div style={{
