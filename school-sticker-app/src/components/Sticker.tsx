@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { StickerData } from '@/types';
 
 interface StickerProps {
@@ -21,9 +21,6 @@ const Sticker: React.FC<StickerProps> = ({
   className = ''
 }) => {
   const textRef = useRef<HTMLDivElement>(null);
-  
-  // POLICE FIXE - plus de calculs dynamiques
-  const fixedFontSize = 6; // 6px pour TOUS les stickers
 
   return (
     <div
@@ -45,9 +42,9 @@ const Sticker: React.FC<StickerProps> = ({
       <div
         className="flex items-center justify-center flex-shrink-0"
         style={{ 
-          fontSize: `${height * 0.2}px`, // Icône fixe en pixels
+          fontSize: `${height * 0.3}px`, // Icône légèrement plus grande
           width: `${width * 0.25}px`, // Largeur fixe
-          height: `${height * 0.6}px`, // Hauteur fixe
+          height: `${height * 0.7}px`, // Hauteur légèrement plus grande
           lineHeight: '1'
         }}
       >
@@ -60,20 +57,20 @@ const Sticker: React.FC<StickerProps> = ({
           ref={textRef}
           className="flex-1 font-semibold text-gray-800 overflow-hidden"
           style={{
-            fontSize: '6px', // Force 6px
+            fontSize: '8px', // Améliorer à 8px
             lineHeight: '1.0',
-            height: `${height * 0.6}px`, // Hauteur encore plus réduite
-            width: `${width * 0.6}px`, // Largeur encore plus réduite
+            height: `${height * 0.7}px`, // Légèrement plus de hauteur
+            width: `${width * 0.65}px`, // Légèrement plus de largeur
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-start',
-            marginLeft: '6px',
-            paddingRight: '8px',
+            marginLeft: '4px',
+            paddingRight: '6px',
             boxSizing: 'border-box'
           }}
         >
           <div style={{
-            fontSize: '6px', // Force 6px aussi ici
+            fontSize: '8px', // Améliorer à 8px aussi ici
             lineHeight: '1.0',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
